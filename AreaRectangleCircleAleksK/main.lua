@@ -51,7 +51,52 @@ areaOfRectangle .. " pixels².", 0, 0, Arial, textSize)
 areaText.anchorX = 0
 areaText.anchorY = 0
 areaText.x = 20
-areaText.y = display.contentHeight/2
+areaText.y = 350
 
 --set the color of newtext
 areaText:setTextColor (0, 1, 0)
+
+----------------------------------------------------------------------------------------------
+-- create my local variables
+local areaText2
+local textSize2 = 50
+local myCircle
+local Radius = 110
+local areaOfCircle
+local PI = 3.14
+
+--draw the rectangle that is half width and height of screen size.
+myCircle = display.newCircle(0, 0, Radius)
+
+--anchor the rectangle in the top left corner of the ipad.
+myCircle.anchorX = 0
+myCircle.anchorY = 0
+myCircle.x = 780
+myCircle.y = 0
+
+-- set the width of the border
+myCircle.strokeWidth = 20
+
+--set the bolor of the rectangle
+myCircle:setFillColor(1, 1, 1)
+
+--set the color of the border
+myCircle:setStrokeColor(0, 0, 0)
+
+-- calculate the area of a rectangle
+areaOfCircle = PI * Radius * Radius
+
+-- write it on screen.
+areaText2 = display.newText("The area of this circle with a radius of \n" ..
+Radius .. " is " ..
+areaOfCircle .. " pixels².", 0, 0, Arial, textSize2)
+
+--anchor the text.
+areaText2.anchorX = 0
+areaText2.anchorY = 0
+areaText2.x = 20
+areaText2.y = 230
+
+--set the color of newtext
+areaText2:setTextColor (0, 1, 0)
+
