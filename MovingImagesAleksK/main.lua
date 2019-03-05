@@ -24,6 +24,7 @@ beetleship.alpha = 0
 beetleship.x = 0
 beetleship.y = display.contentHeight/3
 
+
 --Function move ship
 --Input: this function accepts an event listener
 --Output: none
@@ -33,6 +34,10 @@ local function MoveShip(event)
 	beetleship.x = beetleship.x + scrollSpeed
 	-- change fading the ship
 	beetleship.alpha = beetleship.alpha + 0.01
+	beetleship:rotate(11)
+	beetleship:scale(1.002, 1.002)
+
+
 end
 
 --Moveship will be called over and over
@@ -44,6 +49,8 @@ local rocketship = display.newImageRect("Images/rocketship.png", 200, 200)
 
 local scrollSpeed2 = -4 
 
+local spinSpeed = 3
+
 --change the direction
 rocketship:scale(-1, 1)
 
@@ -52,7 +59,8 @@ rocketship.alpha = 1
 
 -- set the initial x,y 
 rocketship.x = 1024
-rocketship.y = display.contentHeight/3
+rocketship.y = display.contentHeight*3/4
+
 
 --Function move ship
 --Input: this function accepts an event listener
@@ -62,7 +70,10 @@ local function MoveShip(event)
 	-- add the scroll speed
 	rocketship.x = rocketship.x + scrollSpeed2
 	-- change fading the ship
-	rocketship.alpha = rocketship.alpha - 0.005
+	rocketship.alpha = rocketship.alpha - 0.002
+	rocketship:rotate(10)
+	rocketship:scale(1.01^-1, 1.01^-1)
+
 end
 
 --Moveship will be called over and over
