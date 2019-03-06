@@ -27,23 +27,58 @@ redButton.isVisible = false
 local textObject = display.newText ("Clicked!", 0, 0, nil, 50)
 textObject.x = display.contentWidth/2
 textObject.y = display.contentHeight/3
+textObject:setTextColor(1, 0, 1)
 textObject.isVisible = false
 
--- create a local function for the blue button\
+--create a new object
+local SKG = display.newImageRect ("Images/Slave.Knight.Gael.png", 400, 400)
+SKG.x = display.contentWidth/5
+SKG.y = display.contentHeight/4
+SKG.isVisible = false
 
+--create a sound
+local correctSound = audio.loadSound("Sounds/Correct Answer Sound Effect.mp3")
+
+
+-- create a local function for the blue button
 local function BlueButtonListner(touch)
 	if (touch.phase == "began") then 
-		blueButton = false
-		redButton = true
-		textObject = true
+		blueButton.isVisible = false
+		redButton.isVisible = true
+		textObject.isVisible = true
+		SKG.isVisible = true
+		audio.play(correctSound)
 	end
 
 	if (touch.phase == "ended") then
-		blueButton = true
-		redButton = false
-		textObject = false
+		blueButton.isVisible = true
+		redButton.isVisible = false
+		textObject.isVisible = false
+		SKG.isVisible = false
+		
 	end
 end
 
+local function redButtonListner(touch)
+	if (touch.phase == "began") then 
+		blueButton.isVisible = false
+		redButton.isVisible = true
+		textObject.isVisible = true
+		SKG.isVisible = true
+		
+	end
+
+	if (touch.phase == "ended") then
+		blueButton.isVisible = true
+		redButton.isVisible = false
+		textObject.isVisible = false
+		SKG.isVisible = false
+		
+	end
+end
+
+
+
 --add the listener to object
 blueButton:addEventListener("touch", BlueButtonListner)
+redButton:addEventListener("touch", redButtonListner)
