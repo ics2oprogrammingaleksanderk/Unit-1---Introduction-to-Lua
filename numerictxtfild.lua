@@ -53,9 +53,12 @@ end
 
 local function NumericFieldListener( event )
 	-- usernbegins editing the "numericfield"
-	if (event.phase =="began") then
+	if(event.phase =="began") then
 
-	elseif (event.phase == "submitted") then
+		--clear text field
+		event.target.text = ""
+
+	elseif event.phase == "submitted" then
 
 		--when the enter key is pressed set user input to user answer 
 		useranswer = tonumber(event.target.text)
@@ -69,11 +72,8 @@ local function NumericFieldListener( event )
 		if (useranswer ~= correctanswer) then
 			incorrectobject.isVisible = true
 			correctObject.isVisible = false
-			timer.performWithDelay(2000, Hideincorrect)
+			timer.performWithDelay(3000, Hideincorrect)
 		end
-
-		--clear text field
-		event.target.text = ""
 	end
 end
 
@@ -92,7 +92,7 @@ correctObject.isVisible = false
 
 --create the incorrect text object 
 incorrectobject = display.newText( "Incorrect!", display.contentWidth/2, display.contentWidth*2/3, nil, 50)
-incorrectobject:setTextColor(1, 1, 0)
+incorrectobject:setTextColor(1, 0, 0)
 incorrectobject.isVisible = false
 
 -- create numeric field
