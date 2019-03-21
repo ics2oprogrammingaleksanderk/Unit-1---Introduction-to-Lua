@@ -17,6 +17,9 @@ local backgroundImage = display.newImageRect ("Images/background.png", 2048, 153
 
 local beetleship = display.newImageRect("Images/beetleship.png", 200, 200)
 
+local whack = audio.loadSound( "Sounds/whack.mp3")
+local whackSoundChannel
+
 -- set the image transparent
 beetleship.alpha = 0
 
@@ -37,11 +40,11 @@ local function MoveShip(event)
 	beetleship:rotate(11)
 	beetleship:scale(1.002, 1.002)
 
-
 end
 
 --Moveship will be called over and over
 Runtime:addEventListener("enterFrame", MoveShip)
+whackSoundChannel = audio.play(whack)
 
 ----------------------------------------------------------------------------------------------
 
