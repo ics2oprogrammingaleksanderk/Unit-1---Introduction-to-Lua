@@ -32,7 +32,7 @@ beetleship.y = display.contentHeight/3
 --Input: this function accepts an event listener
 --Output: none
 --Description: add scroll speed
-local function MoveShip(event)
+local function MoveBeetleShip(event)
 	-- add the scroll speed
 	beetleship.x = beetleship.x + scrollSpeed
 	-- change fading the ship
@@ -43,7 +43,7 @@ local function MoveShip(event)
 end
 
 --Moveship will be called over and over
-Runtime:addEventListener("enterFrame", MoveShip)
+Runtime:addEventListener("enterFrame", MoveBeetleShip)
 whackSoundChannel = audio.play(whack)
 
 ----------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ rocketship.y = display.contentHeight*3/4
 --Input: this function accepts an event listener
 --Output: none
 --Description: add scroll speed
-local function MoveShip(event)
+local function MoveRocketShip(event)
 	-- add the scroll speed
 	rocketship.x = rocketship.x + scrollSpeed2
 	-- change fading the ship
@@ -80,4 +80,4 @@ local function MoveShip(event)
 end
 
 --Moveship will be called over and over
-Runtime:addEventListener("enterFrame", MoveShip)
+Runtime:addEventListener("enterFrame", MoveRocketShip)
