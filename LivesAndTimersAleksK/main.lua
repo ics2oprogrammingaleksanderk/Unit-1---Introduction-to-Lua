@@ -28,7 +28,7 @@ local correctSoundChannel
 local wrongSound = audio.loadSound( "sounds/wrongSound.mp3")
 local wrongSoundChannel
 local totalSeconds = 5
-local secondsLeft = 10
+local secondsLeft = 5
 local clockText
 local countDownTimer
 local lives = 4
@@ -49,31 +49,26 @@ local function UpdateTime()
 
 	if (secondsLeft == 0) then
 		--resets the seconds
-		secondsLeft = totalSeconds
 		lives = lives - 1
+		secondsLeft = totalSeconds
 
-		--if no lives left left play a sound and a u lose sound
-		if (lives == 3) then
+		--if no lives left left play a sound and a u lose screen
+		if (lives == 4) then
 			heart4.isVisible = false
+		elseif (lives == 3) then
+			heart3.isVisible = false
 		elseif (lives == 2) then
-			heart3.isVisible = false
-		elseif (lives == 1) then
-			heart3.isVisible = false
-        elseif (lives == 0) then
-			heart3.isVisible = false
+			heart2.isVisible = false
+        elseif (lives == 1) then
+			heart1.isVisible = false
 		end
-	AskQuestion()
 	end	
 end
 
 local function StartTimer()
-	countDownTimer = timer.performWithDelay(100, UpdateTime, 0)
+	countDownTimer = timer.performWithDelay(1000, UpdateTime, 0)
 end
 
-local function roundToFirstDecimal( tmpcorrectanswer )
-	print ("tmpcorrectanswer = " .. tmpcorrectanswer)
-    return math.round( tmpcorrectanswer * 10 ) * 0.1
-end
 
 local function AskQuestion()
 	
@@ -98,20 +93,15 @@ local function AskQuestion()
 		
 	elseif (randomOperator == 3) then
 		correctanswer = randomnumber1 * randomnumber2
-
 		questionObject.text = randomnumber1 .. " * " .. randomnumber2 .. " = "
 
 		
 	elseif (randomOperator == 4) then
-			correctanswer = randomnumber1 / randomnumber2
-			print ("correctanswer before rounding = " .. correctanswer)
-			correctanswer = roundToFirstDecimal(correctanswer)
-			print ("correctanswer after rounding = " .. correctanswer)
-			questionObject.text = randomnumber1 .. " / " .. randomnumber2 .. " = "
-			
-			
+		correctanswer = randomnumber1 / randomnumber2
+		questionObject.text = randomnumber1 .. " / " .. randomnumber2 .. " = "	
 	end
 end	
+
 
 
 
@@ -136,7 +126,6 @@ local function NumericFieldListener( event )
 
 		--when the enter key is pressed set user input to user answer 
 		useranswer = tonumber(event.target.text)
-		print("useranswer = " .. useranswer)
 
 		--if users asnwer is correct
 		if (useranswer == correctanswer) then
@@ -147,31 +136,41 @@ local function NumericFieldListener( event )
 			incorrectobject.isVisible = true
 			wrongSoundChannel = audio.play(wrongSound)
 			timer.performWithDelay(2000, Hideincorrect)
+			lives = lives - 1
 		end
-
+		if (lives == 3) then
+			heart4.isVisible = false
+		elseif (lives == 2) then
+			heart3.isVisible = false
+		elseif (lives == 1) then
+			heart2.isVisible = false
+		elseif (lives == 0) then
+			heart1.isVisible = false
+		end	
 		--clear text field
 		event.target.text = ""
 	end
 end
+
 
 -----------------------------------------------------------------------
 --OBJECT CREATION
 -----------------------------------------------------------------------
 heart1 = display.newImageRect("Images/heart.png", 100, 100)
 heart1.x = display.contentWidth * 7 / 8
-heart1.y = display.contentHeight * 7 / 8
+heart1.y = display.contentHeight * 1 / 8
 
 heart2 = display.newImageRect("Images/heart.png", 100, 100)
-heart2.x = display.contentWidth * 7 / 8
-heart2.y = display.contentHeight * 7 / 8
+heart2.x = display.contentWidth * 6 / 8
+heart2.y = display.contentHeight * 1 / 8
 
 heart3 = display.newImageRect("Images/heart.png", 100, 100)
-heart3.x = display.contentWidth * 7 / 8
-heart3.y = display.contentHeight * 7 / 8
+heart3.x = display.contentWidth * 5 / 8
+heart3.y = display.contentHeight * 1 / 8
 
 heart4 = display.newImageRect("Images/heart.png", 100, 100)
-heart4.x = display.contentWidth * 7 / 8
-heart4.y = display.contentHeight * 7 / 8
+heart4.x = display.contentWidth * 4 / 8
+heart4.y = display.contentHeight * 1 / 8
 
 --displays a question
 questionObject = display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
